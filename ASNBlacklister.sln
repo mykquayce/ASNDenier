@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30914.41
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASNDenier.WorkerService", "ASNDenier.WorkerService\ASNDenier.WorkerService.csproj", "{F23A0519-81C4-4464-8930-738E9AF32873}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.WorkerService", "ASNDenier.WorkerService\ASNDenier.WorkerService.csproj", "{F23A0519-81C4-4464-8930-738E9AF32873}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{559C61FF-88D4-4A61-9B2C-0C1C7993B82B}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
