@@ -25,7 +25,7 @@ namespace ASNDenier.WorkerService
 					services
 						.AddTransient<Workflows.Steps.EchoStep>()
 						.AddTransient<Workflows.Steps.GetASNNumbersStep>()
-						.AddTransient<Workflows.Steps.GetIPsStep>();
+						.AddTransient<Workflows.Steps.GetSubnets>();
 
 					services.AddWorkflow();
 				});

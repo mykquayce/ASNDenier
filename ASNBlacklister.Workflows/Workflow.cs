@@ -19,11 +19,14 @@ namespace ASNDenier.Workflows
 					.Do(each => each
 						.StartWith<Steps.EchoStep>()
 							.Input(step => step.Message, (_, context) => (context.Item as int? ?? 0).ToString())
-						.Then<Steps.GetIPsStep>()
+						.Then<Steps.GetSubnets>()
 							.Input(step => step.ASNNumber, (_, context) => context.Item as int? ?? 0)
-							.Output(data => data.Subnets, step => step.Subnets)
-						.Then<Steps.EchoStep>()
-							.Input(step => step.Message, data => string.Join(',', data.Subnets!))
+							.Output(data => data.SubnetAddresses, step => step.Subnets)
+						.ForEach(data => data.SubnetAddresses)
+							.Do(each2 => each2
+								.StartWith<Steps.EchoStep>()
+									.Input(step => step.Message, (_, context) => ((Models.Subnet)context.Item).ToString())
+							)
 					)
 				.EndWorkflow();
 		}
