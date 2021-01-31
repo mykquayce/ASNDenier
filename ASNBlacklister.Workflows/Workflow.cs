@@ -15,8 +15,11 @@ namespace ASNBlacklister.Workflows
 					.Input(step => step.Message, _ => $"Worker running at: {DateTimeOffset.Now}")
 				.Then<Steps.GetASNNumbersStep>()
 					.Output(data => data.ASNNumbers, step => step.ASNNumbers)
-				.Then<Steps.EchoStep>()
-					.Input(step => step.Message, data => string.Join(',', data.ASNNumbers!))
+				.ForEach(data => data.ASNNumbers)
+					.Do(each => each
+						.StartWith<Steps.EchoStep>()
+							.Input(step => step.Message, (_, context) => (context.Item as int? ?? 0).ToString())
+					)
 				.EndWorkflow();
 		}
 	}
