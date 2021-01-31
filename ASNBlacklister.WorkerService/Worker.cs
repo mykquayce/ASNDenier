@@ -20,7 +20,7 @@ namespace ASNBlacklister.WorkerService
 			_workflowHost = workflowHost
 				?? throw new ArgumentNullException(nameof(workflowHost));
 
-			_workflowHost.RegisterWorkflow<Workflows.Workflow>();
+			_workflowHost.RegisterWorkflow<Workflows.Workflow, Models.PersistenceData>();
 		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -29,7 +29,8 @@ namespace ASNBlacklister.WorkerService
 
 			while (!stoppingToken.IsCancellationRequested)
 			{
-				await _workflowHost.StartWorkflow(nameof(Workflows.Workflow));
+				var data = new Models.PersistenceData();
+				await _workflowHost.StartWorkflow(nameof(Workflows.Workflow), data);
 				await Task.Delay(1000, stoppingToken);
 			}
 

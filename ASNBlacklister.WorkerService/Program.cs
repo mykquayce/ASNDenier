@@ -15,9 +15,13 @@ namespace ASNBlacklister.WorkerService
 			hostBuilder
 				.ConfigureServices((hostContext, services) =>
 				{
+					services.Configure<Models.ASNNumbers>(hostContext.Configuration.GetSection(nameof(Models.ASNNumbers)));
+
 					services.AddHostedService<Worker>();
 
-					services.AddTransient<Workflows.Steps.EchoStep>();
+					services
+						.AddTransient<Workflows.Steps.EchoStep>()
+						.AddTransient<Workflows.Steps.GetASNNumbersStep>();
 
 					services.AddWorkflow();
 				});
