@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Workflows", "ASND
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Workflows.Tests", "ASNDenier.Workflows.Tests\ASNDenier.Workflows.Tests.csproj", "{8708BB4F-BF98-4095-995F-66B6EA02929E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASNDenier.Models", "ASNDenier.Models\ASNDenier.Models.csproj", "{36BB031D-029D-45F3-AE37-19EBA2B9477B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Models", "ASNDenier.Models\ASNDenier.Models.csproj", "{36BB031D-029D-45F3-AE37-19EBA2B9477B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

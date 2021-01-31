@@ -19,6 +19,11 @@ namespace ASNDenier.Workflows
 					.Do(each => each
 						.StartWith<Steps.EchoStep>()
 							.Input(step => step.Message, (_, context) => (context.Item as int? ?? 0).ToString())
+						.Then<Steps.GetIPsStep>()
+							.Input(step => step.ASNNumber, (_, context) => context.Item as int? ?? 0)
+							.Output(data => data.Subnets, step => step.Subnets)
+						.Then<Steps.EchoStep>()
+							.Input(step => step.Message, data => string.Join(',', data.Subnets!))
 					)
 				.EndWorkflow();
 		}
