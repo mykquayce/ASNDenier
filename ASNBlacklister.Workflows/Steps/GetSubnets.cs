@@ -5,11 +5,11 @@ using WorkflowCore.Models;
 
 namespace ASNBlacklister.Workflows.Steps
 {
-	public class GetIPsStep : IStepBody
+	public class GetSubnets : IStepBody
 	{
 		private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient;
 
-		public GetIPsStep(Helpers.Networking.Clients.IWhoIsClient whoIsClient)
+		public GetSubnets(Helpers.Networking.Clients.IWhoIsClient whoIsClient)
 		{
 			_whoIsClient = whoIsClient;
 		}
