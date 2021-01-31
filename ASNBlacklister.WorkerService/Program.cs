@@ -20,8 +20,12 @@ namespace ASNBlacklister.WorkerService
 					services.AddHostedService<Worker>();
 
 					services
+						.AddTransient<Helpers.Networking.Clients.IWhoIsClient, Helpers.Networking.Clients.Concrete.WhoIsClient>();
+
+					services
 						.AddTransient<Workflows.Steps.EchoStep>()
-						.AddTransient<Workflows.Steps.GetASNNumbersStep>();
+						.AddTransient<Workflows.Steps.GetASNNumbersStep>()
+						.AddTransient<Workflows.Steps.GetIPsStep>();
 
 					services.AddWorkflow();
 				});
