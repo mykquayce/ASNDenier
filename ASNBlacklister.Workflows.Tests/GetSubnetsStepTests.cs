@@ -5,15 +5,15 @@ using Xunit;
 
 namespace ASNDenier.Workflows.Tests
 {
-	public class GetSubnetsTests
+	public class GetSubnetsStepTests
 	{
-		private readonly Steps.GetSubnets _sut;
+		private readonly Steps.GetSubnetsStep _sut;
 
-		public GetSubnetsTests()
+		public GetSubnetsStepTests()
 		{
 			var whoIsClient = new Helpers.Networking.Clients.Concrete.WhoIsClient();
 
-			_sut = new Steps.GetSubnets(whoIsClient);
+			_sut = new Steps.GetSubnetsStep(whoIsClient);
 		}
 
 		[Theory]
