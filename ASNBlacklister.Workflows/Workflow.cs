@@ -22,11 +22,8 @@ namespace ASNDenier.Workflows
 						.Then<Steps.GetSubnets>()
 							.Input(step => step.ASNNumber, (_, context) => context.Item as int? ?? 0)
 							.Output(data => data.SubnetAddresses, step => step.Subnets)
-						.ForEach(data => data.SubnetAddresses)
-							.Do(each2 => each2
-								.StartWith<Steps.EchoStep>()
-									.Input(step => step.Message, (_, context) => ((Models.Subnet)context.Item).ToString())
-							)
+						.Then<Steps.BlacklistSubnetsStep>()
+							.Input(step => step.SubnetAddresses, data => data.SubnetAddresses)
 					)
 				.EndWorkflow();
 		}
