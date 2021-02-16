@@ -42,7 +42,7 @@ namespace ASNBlacklister.WorkerService
 						.AddScoped<Workflows.Steps.BlacklistSubnetsStep>()
 						.AddTransient<Workflows.Steps.EchoStep>()
 						.AddTransient<Workflows.Steps.GetASNNumbersStep>()
-						.AddTransient<Workflows.Steps.GetSubnets>();
+						.AddTransient<Workflows.Steps.GetSubnetsStep>();
 
 					services.AddWorkflow();
 				});

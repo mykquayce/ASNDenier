@@ -19,7 +19,7 @@ namespace ASNBlacklister.Workflows
 					.Do(each => each
 						.StartWith<Steps.EchoStep>()
 							.Input(step => step.Message, (_, context) => (context.Item as int? ?? 0).ToString())
-						.Then<Steps.GetSubnets>()
+						.Then<Steps.GetSubnetsStep>()
 							.Input(step => step.ASNNumber, (_, context) => context.Item as int? ?? 0)
 							.Output(data => data.SubnetAddresses, step => step.Subnets)
 						.Then<Steps.BlacklistSubnetsStep>()
