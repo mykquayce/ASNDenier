@@ -15,13 +15,13 @@ namespace ASNBlacklister.Workflows.Steps
 		}
 
 		public int? ASNNumber { get; set; }
-		public ICollection<Models.Subnet> Subnets { get; } = new List<Models.Subnet>();
+		public ICollection<Helpers.Networking.Models.SubnetAddress> Subnets { get; } = new List<Helpers.Networking.Models.SubnetAddress>();
 
 		public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
 		{
 			await foreach (var (ip, mask) in _whoIsClient.GetIpsAsync(ASNNumber!.Value))
 			{
-				var subnet = new Models.Subnet(ip, mask);
+				var subnet = new Helpers.Networking.Models.SubnetAddress(ip, mask);
 				Subnets.Add(subnet);
 			}
 

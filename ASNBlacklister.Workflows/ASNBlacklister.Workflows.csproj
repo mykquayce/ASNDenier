@@ -6,8 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Helpers.Networking" Version="1.0.5" />
+    <PackageReference Include="Helpers.Networking" Version="1.0.6" />
+    <PackageReference Include="Helpers.OpenWrt" Version="1.0.5" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+    <PackageReference Include="System.Linq.Async" Version="5.0.0" />
     <PackageReference Include="WorkflowCore" Version="3.3.5" />
   </ItemGroup>
 

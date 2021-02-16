@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WorkflowCore.Interface;
+using WorkflowCore.Models;
 
 namespace ASNBlacklister.WorkerService
 {
@@ -20,7 +21,21 @@ namespace ASNBlacklister.WorkerService
 			_workflowHost = workflowHost
 				?? throw new ArgumentNullException(nameof(workflowHost));
 
+			_workflowHost.OnStepError += WorkflowHost_OnStepError;
+
 			_workflowHost.RegisterWorkflow<Workflows.Workflow, Models.PersistenceData>();
+		}
+
+		private void WorkflowHost_OnStepError(
+			WorkflowInstance workflow,
+			WorkflowStep step,
+			Exception exception)
+		{
+#if DEBUG
+			System.Diagnostics.Debugger.Break();
+#endif
+
+			_logger?.LogError(exception, exception.Message);
 		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -31,7 +46,7 @@ namespace ASNBlacklister.WorkerService
 			{
 				var data = new Models.PersistenceData();
 				await _workflowHost.StartWorkflow(nameof(Workflows.Workflow), data);
-				await Task.Delay(1000, stoppingToken);
+				await Task.Delay(86_400_000, stoppingToken);
 			}
 
 			await _workflowHost.StopAsync(stoppingToken);
