@@ -10,9 +10,15 @@ namespace ASNBlacklister.WorkerService
 	{
 		public static Task Main(string[] args) => CreateHostBuilder(args).RunConsoleAsync();
 
-		public static IHostBuilder CreateHostBuilder(string[] args)
+		public static IHostBuilder CreateHostBuilder(params string[] args)
 		{
 			var hostBuilder = Host.CreateDefaultBuilder(args);
+
+			hostBuilder.ConfigureHostConfiguration(config =>
+			{
+				var assembly = typeof(Program).Assembly;
+				config.AddUserSecrets(assembly);
+			});
 
 			hostBuilder
 				.ConfigureServices((hostContext, services) =>
