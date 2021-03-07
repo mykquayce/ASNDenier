@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System;
 
 namespace ASNBlacklister.Services.Tests
 {
@@ -12,33 +8,23 @@ namespace ASNBlacklister.Services.Tests
 		{
 			WhoIsClient = new Helpers.Networking.Clients.Concrete.WhoIsClient();
 
-			var configuration = new ConfigurationBuilder()
-				.AddUserSecrets(typeof(ASNBlacklister.WorkerService.Program).Assembly)
-				.Build();
+			var configurationFixture = new ConfigurationFixture();
 
-			string s(string key) => configuration![key] ?? throw new KeyNotFoundException($"{key} {nameof(key)} not found.");
+			var host = configurationFixture["Router:Host"];
+			var port = int.Parse(configurationFixture["Router:Port"]);
+			var username = configurationFixture["Router:Username"];
+			var password = configurationFixture["Router:Password"];
 
-			var endPoint = "http://" + s("Router:EndPoint");
-			var password = s("Router:Password");
-
-			var settings = new Helpers.OpenWrt.Clients.Concrete.OpenWrtClient.Settings(endPoint, password);
-
-			var httpClientHandler = new HttpClientHandler { AllowAutoRedirect = false, };
-			var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(settings.EndPoint!), };
-
-			var options = Options.Create(settings);
-			var openWrtClient = new Helpers.OpenWrt.Clients.Concrete.OpenWrtClient(httpClient, options);
-
-			OpenWrtService = new Helpers.OpenWrt.Services.Concrete.OpenWrtService(openWrtClient);
+			SSHService = new Helpers.SSH.Services.Concrete.SSHService(host, port, username, password);
 		}
 
 		public Helpers.Networking.Clients.IWhoIsClient WhoIsClient { get; }
-		public Helpers.OpenWrt.Services.IOpenWrtService OpenWrtService { get; }
+		public Helpers.SSH.Services.ISSHService SSHService { get; }
 
 		public void Dispose()
 		{
 			WhoIsClient?.Dispose();
-			OpenWrtService?.Dispose();
+			SSHService?.Dispose();
 		}
 	}
 }

@@ -6,17 +6,21 @@ namespace ASNBlacklister.Services.Tests
 {
 	public sealed class UnitTest1 : IClassFixture<Fixture>
 	{
-		public Helpers.Networking.Clients.IWhoIsClient _whoIsClient;
-		private readonly Helpers.OpenWrt.Services.IOpenWrtService _openWrtService;
+		private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient;
+		private readonly Helpers.SSH.Services.ISSHService _sshService;
 
 		public UnitTest1(Fixture fixture)
 		{
 			_whoIsClient = fixture.WhoIsClient;
-			_openWrtService = fixture.OpenWrtService;
+			_sshService = fixture.SSHService;
 		}
 
 		[Theory]
 		[InlineData(32_934)] // facebook
+		[InlineData(7_224)] // AMAZON - AS, US
+		[InlineData(8_987)] // AMAZON EXPANSION, IE
+		[InlineData(14_618)] // AMAZON-AES, US
+		[InlineData(16_509)] // AMAZON-02, US
 		public async Task AddIPsToBlackHole_ConfirmTheyWereAdded(int asn)
 		{
 			var subnets = await _whoIsClient.GetIpsAsync(asn).ToListAsync();
@@ -25,7 +29,7 @@ namespace ASNBlacklister.Services.Tests
 			Assert.NotEmpty(subnets);
 			Assert.DoesNotContain(default, subnets);
 
-			await _openWrtService.AddBlackholesAsync(subnets);
+			await _sshService.AddBlackholesAsync(subnets);
 		}
 	}
 }
