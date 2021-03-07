@@ -8,20 +8,20 @@ namespace ASNDenier.Workflows.Steps
 {
 	public class BlacklistSubnetsStep : IStepBody
 	{
-		private readonly Helpers.OpenWrt.Services.IOpenWrtService _openWrtService;
+		private readonly Helpers.SSH.Services.ISSHService _sshService;
 
 		public IEnumerable<Helpers.Networking.Models.SubnetAddress>? SubnetAddresses { get; set; }
 
-		public BlacklistSubnetsStep(Helpers.OpenWrt.Services.IOpenWrtService openWrtService)
+		public BlacklistSubnetsStep(Helpers.SSH.Services.ISSHService sshService)
 		{
-			_openWrtService = Guard.Argument(() => openWrtService).NotNull().Value;
+			_sshService = Guard.Argument(() => sshService).NotNull().Value;
 		}
 
 		public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
 		{
 			Guard.Argument(() => SubnetAddresses!).NotNull().NotEmpty().DoesNotContainNull();
 
-			await _openWrtService.AddBlackholesAsync(SubnetAddresses!);
+			await _sshService.AddBlackholesAsync(SubnetAddresses!);
 
 			return ExecutionResult.Next();
 		}
