@@ -19,7 +19,6 @@ namespace ASNDenier.Workflows.Tests
 		[Theory]
 		[InlineData(714)]
 		[InlineData(2906)]
-		[InlineData(43650)]
 		[InlineData(32934)]
 		public async Task Run(int asnNumber)
 		{
