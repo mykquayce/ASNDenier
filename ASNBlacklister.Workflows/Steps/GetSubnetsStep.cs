@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Dawn;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
@@ -19,9 +20,10 @@ namespace ASNBlacklister.Workflows.Steps
 
 		public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
 		{
-			await foreach (var (ip, mask) in _whoIsClient.GetIpsAsync(ASNNumber!.Value))
+			Guard.Argument(() => ASNNumber).NotNull().Positive();
+
+			await foreach (var subnet in _whoIsClient.GetIpsAsync(ASNNumber!.Value))
 			{
-				var subnet = new Helpers.Networking.Models.SubnetAddress(ip, mask);
 				Subnets.Add(subnet);
 			}
 
