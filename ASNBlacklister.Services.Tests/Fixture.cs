@@ -11,7 +11,7 @@ namespace ASNDenier.Services.Tests
 			var configurationFixture = new ConfigurationFixture();
 
 			var host = configurationFixture["Router:Host"];
-			var port = int.Parse(configurationFixture["Router:Port"]);
+			var port = ushort.Parse(configurationFixture["Router:Port"]);
 			var username = configurationFixture["Router:Username"];
 			var password = configurationFixture["Router:Password"];
 
@@ -21,10 +21,6 @@ namespace ASNDenier.Services.Tests
 		public Helpers.Networking.Clients.IWhoIsClient WhoIsClient { get; }
 		public Helpers.SSH.Services.ISSHService SSHService { get; }
 
-		public void Dispose()
-		{
-			WhoIsClient?.Dispose();
-			SSHService?.Dispose();
-		}
+		public void Dispose() => SSHService?.Dispose();
 	}
 }
