@@ -16,7 +16,7 @@ namespace ASNBlacklister.WorkerService
 			hostBuilder.ConfigureHostConfiguration(config =>
 			{
 				var assembly = typeof(Program).Assembly;
-				config.AddUserSecrets(assembly);
+				config.AddUserSecrets(assembly, optional: true, reloadOnChange: true);
 			});
 
 			hostBuilder

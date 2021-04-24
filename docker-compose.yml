@@ -6,3 +6,23 @@ services:
     image: eassbhhtgu/asnblacklister:latest
     environment:
       DOTNET_ENVIRONMENT: Production
+
+      ASNNumbers:0: 714 #apple
+      ASNNumbers:1: 6185 #apple
+
+      ASNNumbers:2: 2906 #netflix
+      ASNNumbers:3: 40027 #netflix
+      ASNNumbers:4: 55095 #netflix
+
+      ASNNumbers:5: 11917 #whatsapp
+      ASNNumbers:6: 32934 #facebook
+      ASNNumbers:7: 54115 #facebook
+      ASNNumbers:8: 63293 #facebook
+
+      ASNNumbers:9: 7224 #amazon
+      ASNNumbers:10: 8987 #amazon
+      ASNNumbers:11: 14618 #amazon
+      ASNNumbers:12: 16509 #amazon
+      ASNNumbers:13: 62785 #amazon
+
+      Router:Password: ${RouterPassword:-admin}
