@@ -14,7 +14,7 @@ namespace ASNDenier.Workflows
 				.StartWith<Steps.ClearBlacklistStep>()
 				.Then<Steps.GetASNNumbersStep>()
 					.Output(data => data.ASNNumbers, step => step.ASNNumbers)
-				.ForEach(data => data.ASNNumbers)
+				.ForEach(data => data.ASNNumbers, runParallel: _ => false)
 					.Do(each => each
 						.StartWith<Steps.GetSubnetsStep>()
 							.Input(step => step.ASNNumber, (_, context) => context.Item as int? ?? 0)
