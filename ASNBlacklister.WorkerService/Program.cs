@@ -34,7 +34,7 @@ namespace ASNDenier.WorkerService
 
 					services
 						.AddTransient<Workflows.Steps.BlacklistSubnetsStep>()
-						.AddTransient<Workflows.Steps.EchoStep>()
+						.AddTransient<Workflows.Steps.ClearBlacklistStep>()
 						.AddTransient<Workflows.Steps.GetASNNumbersStep>()
 						.AddTransient<Workflows.Steps.GetSubnetsStep>();
 
