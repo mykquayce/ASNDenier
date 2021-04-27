@@ -19,10 +19,10 @@ services:
       ASNNumbers:7: 54115 #facebook
       ASNNumbers:8: 63293 #facebook
 
-      ASNNumbers:9: 7224 #amazon
-      ASNNumbers:10: 8987 #amazon
-      ASNNumbers:11: 14618 #amazon
-      ASNNumbers:12: 16509 #amazon
-      ASNNumbers:13: 62785 #amazon
+      #ASNNumbers:9: 7224 #amazon
+      #ASNNumbers:10: 8987 #amazon
+      #ASNNumbers:11: 14618 #amazon
+      #ASNNumbers:12: 16509 #amazon
+      #ASNNumbers:13: 62785 #amazon
 
       Router:Password: ${RouterPassword:-admin}
