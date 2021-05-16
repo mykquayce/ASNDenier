@@ -13,9 +13,12 @@ namespace ASNBlacklister.Services.Tests
 			var host = configurationFixture["Router:Host"];
 			var port = ushort.Parse(configurationFixture["Router:Port"]);
 			var username = configurationFixture["Router:Username"];
-			var password = configurationFixture["Router:Password"];
+			var pathToPrivateKey = configurationFixture["Router:PathToPrivateKey"];
+			var pathToPublicKey = configurationFixture["Router:PathToPublicKey"];
 
-			SSHService = new Helpers.SSH.Services.Concrete.SSHService(host, port, username, password);
+			var config = new Helpers.SSH.Services.Concrete.SSHService.Config(host, port, username, PathToPrivateKey: pathToPrivateKey, PathToPublicKey: pathToPublicKey);
+
+			SSHService = new Helpers.SSH.Services.Concrete.SSHService(config);
 		}
 
 		public Helpers.Networking.Clients.IWhoIsClient WhoIsClient { get; }
