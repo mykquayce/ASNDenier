@@ -10,7 +10,7 @@ namespace ASNDenier.Workflows.Steps
 	{
 		private readonly Helpers.SSH.Services.ISSHService _sshService;
 
-		public IEnumerable<Helpers.Networking.Models.SubnetAddress>? SubnetAddresses { get; set; }
+		public IEnumerable<Helpers.Networking.Models.AddressPrefix>? Prefixes { get; set; }
 
 		public BlacklistSubnetsStep(Helpers.SSH.Services.ISSHService sshService)
 		{
@@ -19,9 +19,9 @@ namespace ASNDenier.Workflows.Steps
 
 		public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
 		{
-			Guard.Argument(() => SubnetAddresses!).NotNull().NotEmpty().DoesNotContainNull();
+			Guard.Argument(() => Prefixes!).NotNull().NotEmpty().DoesNotContainNull();
 
-			await _sshService.AddBlackholesAsync(SubnetAddresses!);
+			await _sshService.AddBlackholesAsync(Prefixes!);
 
 			return ExecutionResult.Next();
 		}

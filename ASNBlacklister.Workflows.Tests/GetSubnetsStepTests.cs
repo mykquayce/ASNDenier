@@ -28,14 +28,13 @@ namespace ASNDenier.Workflows.Tests
 
 			Assert.True(result.Proceed);
 
-			Assert.NotEmpty(_sut.Subnets);
-			Assert.DoesNotContain(default, _sut.Subnets);
+			Assert.NotEmpty(_sut.Prefixes);
+			Assert.DoesNotContain(default, _sut.Prefixes);
 
-			foreach (var (ip, mask) in _sut.Subnets)
+			foreach (var (ip, mask) in _sut.Prefixes)
 			{
 				Assert.NotNull(ip);
-				Assert.NotNull(mask);
-				Assert.InRange(mask!.Value, 1, 63);
+				Assert.InRange(mask, 1, 63);
 			}
 		}
 	}

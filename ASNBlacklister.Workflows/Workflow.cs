@@ -18,9 +18,9 @@ namespace ASNDenier.Workflows
 					.Do(each => each
 						.StartWith<Steps.GetSubnetsStep>()
 							.Input(step => step.ASNNumber, (_, context) => context.Item as int? ?? 0)
-							.Output(data => data.SubnetAddresses, step => step.Subnets)
+							.Output(data => data.Prefixes, step => step.Prefixes)
 						.Then<Steps.BlacklistSubnetsStep>()
-							.Input(step => step.SubnetAddresses, data => data.SubnetAddresses)
+							.Input(step => step.Prefixes, data => data.Prefixes)
 					)
 				.EndWorkflow();
 		}

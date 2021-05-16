@@ -16,15 +16,15 @@ namespace ASNDenier.Workflows.Steps
 		}
 
 		public int? ASNNumber { get; set; }
-		public ICollection<Helpers.Networking.Models.SubnetAddress> Subnets { get; } = new List<Helpers.Networking.Models.SubnetAddress>();
+		public ICollection<Helpers.Networking.Models.AddressPrefix> Prefixes { get; } = new List<Helpers.Networking.Models.AddressPrefix>();
 
 		public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
 		{
 			Guard.Argument(() => ASNNumber).NotNull().Positive();
 
-			await foreach (var subnet in _whoIsClient.GetIpsAsync(ASNNumber!.Value))
+			await foreach (var prefix in _whoIsClient.GetIpsAsync(ASNNumber!.Value))
 			{
-				Subnets.Add(subnet);
+				Prefixes.Add(prefix);
 			}
 
 			return ExecutionResult.Next();
