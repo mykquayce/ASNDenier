@@ -15,8 +15,7 @@ namespace ASNDenier.WorkerService
 
 			hostBuilder.ConfigureHostConfiguration(config =>
 			{
-				var assembly = typeof(Program).Assembly;
-				config.AddUserSecrets(assembly, optional: true, reloadOnChange: true);
+				config.AddUserSecrets<Program>(optional: true, reloadOnChange: true);
 			});
 
 			hostBuilder
