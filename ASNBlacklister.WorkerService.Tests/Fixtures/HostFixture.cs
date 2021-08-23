@@ -1,18 +1,16 @@
 ﻿using Microsoft.Extensions.Hosting;
-using System;
 
-namespace ASNBlacklister.WorkerService.Tests.Fixtures
+namespace ASNBlacklister.WorkerService.Tests.Fixtures;
+
+public sealed class HostFixture : IDisposable
 {
-	public sealed class HostFixture : IDisposable
+	public HostFixture()
 	{
-		public HostFixture()
-		{
-			var hostBuilder = Program.CreateHostBuilder();
-			Host = hostBuilder.Build();
-		}
-
-		public void Dispose() => Host.Dispose();
-
-		public IHost Host { get; }
+		var hostBuilder = Program.CreateHostBuilder();
+		Host = hostBuilder.Build();
 	}
+
+	public void Dispose() => Host.Dispose();
+
+	public IHost Host { get; }
 }

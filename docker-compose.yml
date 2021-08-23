@@ -25,4 +25,13 @@ services:
       #ASNNumbers:12: 16509 #amazon
       #ASNNumbers:13: 62785 #amazon
 
-      Router:Password: ${RouterPassword:-admin}
+      ASNNumbers:14: 138699 #tiktok
+
+      Router:PathToPrivateKey: /run/secrets/id_rsa
+
+    secrets:
+    - source: id_rsa
+
+secrets:
+  id_rsa:
+    file: ${USERPROFILE}\.ssh\id_rsa

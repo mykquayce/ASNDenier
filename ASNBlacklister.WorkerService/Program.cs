@@ -1,46 +1,41 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
+namespace ASNBlacklister.WorkerService;
 
-namespace ASNBlacklister.WorkerService
+public class Program
 {
-	public class Program
+	public static Task Main(string[] args) => CreateHostBuilder(args).RunConsoleAsync();
+
+	public static IHostBuilder CreateHostBuilder(params string[] args)
 	{
-		public static Task Main(string[] args) => CreateHostBuilder(args).RunConsoleAsync();
+		var hostBuilder = Host.CreateDefaultBuilder(args);
 
-		public static IHostBuilder CreateHostBuilder(params string[] args)
+		hostBuilder.ConfigureHostConfiguration(config =>
 		{
-			var hostBuilder = Host.CreateDefaultBuilder(args);
+			config.AddUserSecrets<Program>(optional: true, reloadOnChange: true);
+		});
 
-			hostBuilder.ConfigureHostConfiguration(config =>
+		hostBuilder
+			.ConfigureServices((hostContext, services) =>
 			{
-				config.AddUserSecrets<Program>(optional: true, reloadOnChange: true);
+				services
+					.Configure<Models.ASNNumbers>(hostContext.Configuration.GetSection(nameof(Models.ASNNumbers)))
+					.Configure<Helpers.SSH.Config>(hostContext.Configuration.GetSection("Router"));
+
+				services.AddHostedService<Worker>();
+
+				services
+					.AddTransient<Helpers.Networking.Clients.IWhoIsClient, Helpers.Networking.Clients.Concrete.WhoIsClient>()
+					.AddTransient<Helpers.SSH.IClient, Helpers.SSH.Concrete.Client>()
+					.AddTransient<Helpers.SSH.IService, Helpers.SSH.Concrete.Service>();
+
+				services
+					.AddTransient<Workflows.Steps.BlacklistSubnetsStep>()
+					.AddTransient<Workflows.Steps.ClearBlacklistStep>()
+					.AddTransient<Workflows.Steps.GetASNNumbersStep>()
+					.AddTransient<Workflows.Steps.GetSubnetsStep>();
+
+				services.AddWorkflow();
 			});
 
-			hostBuilder
-				.ConfigureServices((hostContext, services) =>
-				{
-					services
-						.Configure<Models.ASNNumbers>(hostContext.Configuration.GetSection(nameof(Models.ASNNumbers)))
-						.Configure<Helpers.SSH.Services.Concrete.SSHService.Config>(hostContext.Configuration.GetSection("Router"));
-
-					services.AddHostedService<Worker>();
-
-					services
-						.AddTransient<Helpers.Networking.Clients.IWhoIsClient, Helpers.Networking.Clients.Concrete.WhoIsClient>()
-						.AddTransient<Helpers.SSH.Services.ISSHService, Helpers.SSH.Services.Concrete.SSHService>();
-
-					services
-						.AddTransient<Workflows.Steps.BlacklistSubnetsStep>()
-						.AddTransient<Workflows.Steps.ClearBlacklistStep>()
-						.AddTransient<Workflows.Steps.GetASNNumbersStep>()
-						.AddTransient<Workflows.Steps.GetSubnetsStep>();
-
-					services.AddWorkflow();
-				});
-
-			return hostBuilder;
-		}
+		return hostBuilder;
 	}
 }
