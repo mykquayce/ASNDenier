@@ -7,9 +7,9 @@ namespace ASNDenier.Workflows.Steps
 {
 	public class ClearBlacklistStep : IStepBody
 	{
-		private readonly Helpers.SSH.Services.ISSHService _sshService;
+		private readonly Helpers.SSH.IService _sshService;
 
-		public ClearBlacklistStep(Helpers.SSH.Services.ISSHService sshService)
+		public ClearBlacklistStep(Helpers.SSH.IService sshService)
 		{
 			_sshService = Guard.Argument(() => sshService).NotNull().Value;
 		}

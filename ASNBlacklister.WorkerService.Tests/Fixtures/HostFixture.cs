@@ -1,18 +1,16 @@
 ﻿using Microsoft.Extensions.Hosting;
-using System;
 
-namespace ASNDenier.WorkerService.Tests.Fixtures
+namespace ASNDenier.WorkerService.Tests.Fixtures;
+
+public sealed class HostFixture : IDisposable
 {
-	public sealed class HostFixture : IDisposable
+	public HostFixture()
 	{
-		public HostFixture()
-		{
-			var hostBuilder = Program.CreateHostBuilder();
-			Host = hostBuilder.Build();
-		}
-
-		public void Dispose() => Host.Dispose();
-
-		public IHost Host { get; }
+		var hostBuilder = Program.CreateHostBuilder();
+		Host = hostBuilder.Build();
 	}
+
+	public void Dispose() => Host.Dispose();
+
+	public IHost Host { get; }
 }

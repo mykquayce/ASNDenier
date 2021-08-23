@@ -1,6 +1,4 @@
 ﻿using Dawn;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
@@ -8,11 +6,11 @@ namespace ASNDenier.Workflows.Steps
 {
 	public class BlacklistSubnetsStep : IStepBody
 	{
-		private readonly Helpers.SSH.Services.ISSHService _sshService;
+		private readonly Helpers.SSH.IService _sshService;
 
 		public IEnumerable<Helpers.Networking.Models.AddressPrefix>? Prefixes { get; set; }
 
-		public BlacklistSubnetsStep(Helpers.SSH.Services.ISSHService sshService)
+		public BlacklistSubnetsStep(Helpers.SSH.IService sshService)
 		{
 			_sshService = Guard.Argument(() => sshService).NotNull().Value;
 		}
