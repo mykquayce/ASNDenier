@@ -1,6 +1,5 @@
 ﻿using Dawn;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
@@ -9,10 +8,12 @@ namespace ASNDenier.Workflows.Steps
 	public class GetSubnetsStep : IStepBody
 	{
 		private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient;
+		private readonly ILogger<GetSubnetsStep> _logger;
 
-		public GetSubnetsStep(Helpers.Networking.Clients.IWhoIsClient whoIsClient)
+		public GetSubnetsStep(Helpers.Networking.Clients.IWhoIsClient whoIsClient, ILogger<GetSubnetsStep> logger)
 		{
 			_whoIsClient = whoIsClient;
+			_logger = logger;
 		}
 
 		public int? ASNNumber { get; set; }
@@ -26,6 +27,8 @@ namespace ASNDenier.Workflows.Steps
 			{
 				Prefixes.Add(prefix);
 			}
+
+			_logger?.LogInformation("Found {Count} prefix(es) for ASN {ASNNumber}.", Prefixes.Count, ASNNumber);
 
 			return ExecutionResult.Next();
 		}
