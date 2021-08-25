@@ -1,3 +1,5 @@
+using Dawn;
+using Microsoft.Extensions.Options;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
@@ -7,8 +9,9 @@ public class Worker : BackgroundService
 {
 	private readonly ILogger<Worker> _logger;
 	private readonly IWorkflowHost _workflowHost;
+	private readonly IReadOnlyCollection<int> _asnNumbers;
 
-	public Worker(ILogger<Worker> logger, IWorkflowHost workflowHost)
+	public Worker(ILogger<Worker> logger, IWorkflowHost workflowHost, IOptions<Models.ASNNumbers> options)
 	{
 		_logger = logger
 			?? throw new ArgumentNullException(nameof(logger));
@@ -18,6 +21,9 @@ public class Worker : BackgroundService
 		_workflowHost.OnStepError += WorkflowHost_OnStepError;
 
 		_workflowHost.RegisterWorkflow<Workflows.Workflow, Models.PersistenceData>();
+
+		_asnNumbers = Guard.Argument(() => options).NotNull().Wrap(o => o.Value)
+			.NotNull().NotEmpty().Value;
 	}
 
 	private void WorkflowHost_OnStepError(
@@ -38,7 +44,10 @@ public class Worker : BackgroundService
 
 		while (!stoppingToken.IsCancellationRequested)
 		{
-			var data = new Models.PersistenceData();
+			var data = new Models.PersistenceData
+			{
+				ASNNumbers = _asnNumbers,
+			};
 			await _workflowHost.StartWorkflow(nameof(Workflows.Workflow), data);
 			await Task.Delay(86_400_000, stoppingToken);
 		}
