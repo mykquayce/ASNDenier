@@ -30,7 +30,6 @@ public class Program
 				services
 					.AddTransient<Workflows.Steps.BlacklistSubnetsStep>()
 					.AddTransient<Workflows.Steps.ClearBlacklistStep>()
-					.AddTransient<Workflows.Steps.GetASNNumbersStep>()
 					.AddTransient<Workflows.Steps.GetSubnetsStep>();
 
 				services.AddWorkflow();
