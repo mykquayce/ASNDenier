@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
 using System.Threading.Tasks;
 using WorkflowCore.Interface;
 using Xunit;
@@ -12,17 +13,18 @@ namespace ASNDenier.Workflows.Tests
 		public GetSubnetsStepTests()
 		{
 			var whoIsClient = new Helpers.Networking.Clients.Concrete.WhoIsClient();
+			var logger = Mock.Of<ILogger<Steps.GetSubnetsStep>>();
 
-			_sut = new Steps.GetSubnetsStep(whoIsClient);
+			_sut = new Steps.GetSubnetsStep(whoIsClient, logger);
 		}
 
 		[Theory]
-		[InlineData(714)]
-		[InlineData(2906)]
-		[InlineData(32934)]
-		public async Task Run(int asnNumber)
+		[InlineData("apple", 714)]
+		[InlineData("netflix", 2906)]
+		[InlineData("facebook", 32934)]
+		public async Task Run(string organization, params int[] asns)
 		{
-			_sut.ASNNumber = asnNumber;
+			_sut.ASNNumbers = new KeyValuePair<string, int[]>(organization, asns);
 
 			var result = await _sut.RunAsync(Mock.Of<IStepExecutionContext>());
 

@@ -10,7 +10,7 @@ namespace ASNDenier.Workflows.Steps
 		private readonly Helpers.SSH.IService _sshService;
 		private readonly ILogger<BlacklistSubnetsStep> _logger;
 
-		public IEnumerable<Helpers.Networking.Models.AddressPrefix>? Prefixes { get; set; }
+		public ICollection<Helpers.Networking.Models.AddressPrefix>? Prefixes { get; set; }
 
 		public BlacklistSubnetsStep(Helpers.SSH.IService sshService, ILogger<BlacklistSubnetsStep> logger)
 		{

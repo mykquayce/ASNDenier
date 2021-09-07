@@ -15,7 +15,7 @@ namespace ASNDenier.Workflows
 				.ForEach(data => data.ASNNumbers, runParallel: _ => false)
 					.Do(each => each
 						.StartWith<Steps.GetSubnetsStep>()
-							.Input(step => step.ASNNumber, (_, context) => context.Item as int? ?? 0)
+							.Input(step => step.ASNNumbers, (_, context) => context.Item as KeyValuePair<string, int[]>?)
 							.Output(data => data.Prefixes, step => step.Prefixes)
 						.Then<Steps.BlacklistSubnetsStep>()
 							.Input(step => step.Prefixes, data => data.Prefixes)

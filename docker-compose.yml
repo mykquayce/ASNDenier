@@ -7,25 +7,28 @@ services:
     environment:
       DOTNET_ENVIRONMENT: Production
 
-      ASNNumbers:0: 714 #apple
-      ASNNumbers:1: 6185 #apple
+      #ASNNumbers:amazon:0: 7224
+      #ASNNumbers:amazon:1: 8987
+      #ASNNumbers:amazon:2: 14618
+      #ASNNumbers:amazon:3: 16509
+      #ASNNumbers:amazon:4: 62785
 
-      ASNNumbers:2: 2906 #netflix
-      ASNNumbers:3: 40027 #netflix
-      ASNNumbers:4: 55095 #netflix
+      ASNNumbers:apple:0: 714
+      ASNNumbers:apple:1: 6185
 
-      ASNNumbers:5: 11917 #whatsapp
-      ASNNumbers:6: 32934 #facebook
-      ASNNumbers:7: 54115 #facebook
-      ASNNumbers:8: 63293 #facebook
+      ASNNumbers:epicgames:0: 4356
 
-      #ASNNumbers:9: 7224 #amazon
-      #ASNNumbers:10: 8987 #amazon
-      #ASNNumbers:11: 14618 #amazon
-      #ASNNumbers:12: 16509 #amazon
-      #ASNNumbers:13: 62785 #amazon
+      ASNNumbers:facebook:0: 32934
+      ASNNumbers:facebook:1: 54115
+      ASNNumbers:facebook:2: 63293
 
-      ASNNumbers:14: 138699 #tiktok
+      ASNNumbers:netflix:0: 2906
+      ASNNumbers:netflix:1: 40027
+      ASNNumbers:netflix:2: 55095
+
+      ASNNumbers:tiktok:0: 138699
+
+      ASNNumbers:whatsapp:0: 11917
 
       Router:PathToPrivateKey: /run/secrets/id_rsa
 

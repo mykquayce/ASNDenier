@@ -9,7 +9,7 @@ public class Worker : BackgroundService
 {
 	private readonly ILogger<Worker> _logger;
 	private readonly IWorkflowHost _workflowHost;
-	private readonly IReadOnlyCollection<int> _asnNumbers;
+	private readonly IReadOnlyDictionary<string, int[]> _asnNumbers;
 
 	public Worker(ILogger<Worker> logger, IWorkflowHost workflowHost, IOptions<Models.ASNNumbers> options)
 	{
