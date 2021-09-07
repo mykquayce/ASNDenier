@@ -16,19 +16,26 @@ namespace ASNBlacklister.Workflows.Steps
 			_logger = logger;
 		}
 
-		public int? ASNNumber { get; set; }
+		public KeyValuePair<string, int[]>? ASNNumbers { get; set; }
 		public ICollection<Helpers.Networking.Models.AddressPrefix> Prefixes { get; } = new List<Helpers.Networking.Models.AddressPrefix>();
 
 		public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
 		{
-			Guard.Argument(() => ASNNumber).NotNull().Positive();
+			var (organization, asns) = Guard.Argument(() => ASNNumbers).NotNull().Value;
 
-			await foreach (var prefix in _whoIsClient.GetIpsAsync(ASNNumber!.Value))
+			_logger.LogInformation("getting prefix(es) for {organization} {count} asn(s)", organization, asns.Length);
+
+			foreach (var asn in asns)
 			{
-				Prefixes.Add(prefix);
+				var prefixes = _whoIsClient.GetIpsAsync(asn);
+
+				await foreach (var prefix in prefixes)
+				{
+					Prefixes.Add(prefix);
+				}
 			}
 
-			_logger?.LogInformation("Found {Count} prefix(es) for ASN {ASNNumber}.", Prefixes.Count, ASNNumber);
+			_logger?.LogInformation("Found {count} prefix(es) for {organization}.", Prefixes.Count, organization);
 
 			return ExecutionResult.Next();
 		}
