@@ -1,6 +1,3 @@
-﻿using System.Collections.Generic;
+﻿namespace ASNDenier.Models;
 
-namespace ASNDenier.Models
-{
-	public class ASNNumbers : Dictionary<string, int[]> { }
-}
+public class ASNNumbers : Dictionary<string, int[]> { }

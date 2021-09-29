@@ -3,7 +3,6 @@ using Xunit;
 
 namespace ASNDenier.Services.Tests;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2252:This API requires opting into preview features", Justification = "<Pending>")]
 public sealed class UnitTest1 : IClassFixture<Fixtures.ClientFixture>, IClassFixture<Fixtures.ServiceFixture>
 {
 	private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient;

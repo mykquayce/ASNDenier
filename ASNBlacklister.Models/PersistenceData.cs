@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+﻿namespace ASNDenier.Models;
 
-namespace ASNDenier.Models
+public record PersistenceData(IReadOnlyDictionary<string, int[]>? ASNNumbers, ICollection<Helpers.Networking.Models.AddressPrefix>? Prefixes)
 {
-	public record PersistenceData(IReadOnlyDictionary<string, int[]>? ASNNumbers, ICollection<Helpers.Networking.Models.AddressPrefix>? Prefixes)
-	{
-		public PersistenceData() : this(default, default) { }
-	}
+	public PersistenceData() : this(default, default) { }
 }

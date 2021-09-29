@@ -3,32 +3,31 @@ using Microsoft.Extensions.Logging;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
-namespace ASNDenier.Workflows.Steps
+namespace ASNDenier.Workflows.Steps;
+
+public class BlacklistSubnetsStep : IStepBody
 {
-	public class BlacklistSubnetsStep : IStepBody
+	private readonly Helpers.SSH.IService _sshService;
+	private readonly ILogger<BlacklistSubnetsStep> _logger;
+
+	public ICollection<Helpers.Networking.Models.AddressPrefix>? Prefixes { get; set; }
+
+	public BlacklistSubnetsStep(Helpers.SSH.IService sshService, ILogger<BlacklistSubnetsStep> logger)
 	{
-		private readonly Helpers.SSH.IService _sshService;
-		private readonly ILogger<BlacklistSubnetsStep> _logger;
+		_sshService = Guard.Argument(sshService).NotNull().Value;
+		_logger = logger;
+	}
 
-		public ICollection<Helpers.Networking.Models.AddressPrefix>? Prefixes { get; set; }
+	public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
+	{
+		Guard.Argument(Prefixes!).NotNull().DoesNotContainNull();
 
-		public BlacklistSubnetsStep(Helpers.SSH.IService sshService, ILogger<BlacklistSubnetsStep> logger)
+		if (Prefixes!.Any())
 		{
-			_sshService = Guard.Argument(() => sshService).NotNull().Value;
-			_logger = logger;
+			_logger?.LogInformation("Applying prefixes {Prefixes}", string.Join(", ", Prefixes!));
+			await _sshService.AddBlackholesAsync(Prefixes!);
 		}
 
-		public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
-		{
-			Guard.Argument(() => Prefixes!).NotNull().DoesNotContainNull();
-
-			if (Prefixes!.Any())
-			{
-				_logger?.LogInformation("Applying prefixes {Prefixes}", string.Join(", ", Prefixes!));
-				await _sshService.AddBlackholesAsync(Prefixes!);
-			}
-
-			return ExecutionResult.Next();
-		}
+		return ExecutionResult.Next();
 	}
 }
