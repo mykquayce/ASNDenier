@@ -1,6 +1,3 @@
-﻿using System.Collections.Generic;
+﻿namespace ASNBlacklister.Models;
 
-namespace ASNBlacklister.Models
-{
-	public class ASNNumbers : Dictionary<string, int[]> { }
-}
+public class ASNNumbers : Dictionary<string, int[]> { }

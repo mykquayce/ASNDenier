@@ -1,26 +1,24 @@
-﻿using System;
-using WorkflowCore.Interface;
+﻿using WorkflowCore.Interface;
 
-namespace ASNBlacklister.Workflows
+namespace ASNBlacklister.Workflows;
+
+public class Workflow : IWorkflow<Models.PersistenceData>
 {
-	public class Workflow : IWorkflow<Models.PersistenceData>
-	{
-		public string Id => nameof(Workflow);
-		public int Version => 1;
+	public string Id => nameof(Workflow);
+	public int Version => 1;
 
-		public void Build(IWorkflowBuilder<Models.PersistenceData> builder)
-		{
-			builder
-				.StartWith<Steps.ClearBlacklistStep>()
-				.ForEach(data => data.ASNNumbers, runParallel: _ => false)
-					.Do(each => each
-						.StartWith<Steps.GetSubnetsStep>()
-							.Input(step => step.ASNNumbers, (_, context) => context.Item as KeyValuePair<string, int[]>?)
-							.Output(data => data.Prefixes, step => step.Prefixes)
-						.Then<Steps.BlacklistSubnetsStep>()
-							.Input(step => step.Prefixes, data => data.Prefixes)
-					)
-				.EndWorkflow();
-		}
+	public void Build(IWorkflowBuilder<Models.PersistenceData> builder)
+	{
+		builder
+			.StartWith<Steps.ClearBlacklistStep>()
+			.ForEach(data => data.ASNNumbers, runParallel: _ => false)
+				.Do(each => each
+					.StartWith<Steps.GetSubnetsStep>()
+						.Input(step => step.ASNNumbers, (_, context) => context.Item as KeyValuePair<string, int[]>?)
+						.Output(data => data.Prefixes, step => step.Prefixes)
+					.Then<Steps.BlacklistSubnetsStep>()
+						.Input(step => step.Prefixes, data => data.Prefixes)
+				)
+			.EndWorkflow();
 	}
 }
