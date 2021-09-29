@@ -32,7 +32,10 @@ public class Program
 					.AddTransient<Workflows.Steps.ClearBlacklistStep>()
 					.AddTransient<Workflows.Steps.GetSubnetsStep>();
 
-				services.AddWorkflow();
+				services.AddWorkflow(options =>
+				{
+					options.UsePollInterval(TimeSpan.FromMinutes(1));
+				});
 			});
 
 		return hostBuilder;
