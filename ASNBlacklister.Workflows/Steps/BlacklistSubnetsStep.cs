@@ -21,10 +21,10 @@ public class BlacklistSubnetsStep : IStepBody
 	public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
 	{
 		Guard.Argument(Prefixes!).NotNull().DoesNotContainNull();
+		_logger?.LogInformation("Applying {Count} prefix(es)", Prefixes!.Count);
 
 		if (Prefixes!.Any())
 		{
-			_logger?.LogInformation("Applying prefixes {Prefixes}", string.Join(", ", Prefixes!));
 			await _sshService.AddBlackholesAsync(Prefixes!);
 		}
 

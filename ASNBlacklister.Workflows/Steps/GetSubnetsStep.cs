@@ -23,19 +23,21 @@ public class GetSubnetsStep : IStepBody
 	{
 		var (organization, asns) = Guard.Argument(ASNNumbers).NotNull().Value;
 
-		_logger.LogInformation("getting prefix(es) for {organization} {count} asn(s)", organization, asns.Length);
+		_logger.LogInformation("{organization} has {count} asn(s) : {asns}", organization, asns.Length, string.Join(", ", asns));
 
 		foreach (var asn in asns)
 		{
+			var count = 0;
 			var prefixes = _whoIsClient.GetIpsAsync(asn);
 
 			await foreach (var prefix in prefixes)
 			{
+				count++;
 				Prefixes.Add(prefix);
 			}
-		}
 
-		_logger?.LogInformation("Found {count} prefix(es) for {organization}.", Prefixes.Count, organization);
+			_logger?.LogInformation("{asn} has {count} prefix(es)", asn, count);
+		}
 
 		return ExecutionResult.Next();
 	}
