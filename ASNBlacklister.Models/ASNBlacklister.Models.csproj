@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Helpers.Networking.Models" Version="1.1.15-rc1" />
+    <PackageReference Include="Helpers.Networking.Models" Version="1.1.16" />
   </ItemGroup>
 
 </Project>
