@@ -34,7 +34,7 @@ public class Program
 
 				services.AddWorkflow(options =>
 				{
-					options.UsePollInterval(TimeSpan.FromMinutes(1));
+					options.EnablePolling = false;
 				});
 			});
 
