@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASNBlacklister.Workflows\ASNDenier.Workflows.csproj" />
+    <ProjectReference Include="..\ASNDenier.Workflows\ASNDenier.Workflows.csproj" />
   </ItemGroup>
 
 </Project>

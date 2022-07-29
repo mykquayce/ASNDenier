@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASNBlacklister.Models\ASNDenier.Models.csproj" />
+    <ProjectReference Include="..\ASNDenier.Models\ASNDenier.Models.csproj" />
   </ItemGroup>
 
 </Project>
