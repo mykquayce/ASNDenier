@@ -4,11 +4,11 @@ using WorkflowCore.Models;
 
 namespace ASNDenier.Workflows.Steps;
 
-public class ClearBlacklistStep : IStepBody
+public class ClearDenylistStep : IStepBody
 {
 	private readonly Helpers.SSH.IService _sshService;
 
-	public ClearBlacklistStep(Helpers.SSH.IService sshService)
+	public ClearDenylistStep(Helpers.SSH.IService sshService)
 	{
 		_sshService = Guard.Argument(sshService).NotNull().Value;
 	}
