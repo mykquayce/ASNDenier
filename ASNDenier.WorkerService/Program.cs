@@ -28,8 +28,8 @@ public class Program
 					.AddTransient<Helpers.SSH.IService, Helpers.SSH.Concrete.Service>();
 
 				services
-					.AddTransient<Workflows.Steps.BlacklistSubnetsStep>()
-					.AddTransient<Workflows.Steps.ClearBlacklistStep>()
+					.AddTransient<Workflows.Steps.DenySubnetsStep>()
+					.AddTransient<Workflows.Steps.ClearDenylistStep>()
 					.AddTransient<Workflows.Steps.GetSubnetsStep>();
 
 				services.AddWorkflow(options =>
