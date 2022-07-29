@@ -1,4 +1,4 @@
-docker pull eassbhhtgu/asnblacklister:latest
+docker pull eassbhhtgu/asndenier:latest
 if (!$?) { return; }
 
-docker stack deploy --compose-file .\docker-compose.yml asnblacklister
+docker stack deploy --compose-file .\docker-compose.yml asndenier

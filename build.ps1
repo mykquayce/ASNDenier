@@ -6,8 +6,8 @@ if (!$?) { return; }
 
 docker build `
 	--secret id=ca_crt,src=${env:userprofile}\.aspnet\https\ca.crt `
-	--tag eassbhhtgu/asnblacklister:latest `
+	--tag eassbhhtgu/asndenier:latest `
 	.
 if (!$?) { return; }
 
-docker push eassbhhtgu/asnblacklister:latest
+docker push eassbhhtgu/asndenier:latest

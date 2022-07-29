@@ -3,7 +3,7 @@ version: '3.7'
 services:
  
   worker:
-    image: eassbhhtgu/asnblacklister:latest
+    image: eassbhhtgu/asndenier:latest
     environment:
       DOTNET_ENVIRONMENT: Production
 
