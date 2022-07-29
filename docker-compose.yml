@@ -16,7 +16,16 @@ services:
       ASNNumbers:apple:0: 714
       ASNNumbers:apple:1: 6185
 
+      ASNNumbers:disney:0: 8137
+      ASNNumbers:disney:1: 11251
+      ASNNumbers:disney:2: 22604
+      ASNNumbers:disney:3: 23344
+      ASNNumbers:disney:4: 29736
+      ASNNumbers:disney:5: 398849
+
       ASNNumbers:epicgames:0: 4356
+      ASNNumbers:epicgames:1: 395701
+      ASNNumbers:epicgames:2: 397645
 
       ASNNumbers:facebook:0: 32934
       ASNNumbers:facebook:1: 54115
@@ -27,11 +36,14 @@ services:
       ASNNumbers:netflix:2: 55095
 
       ASNNumbers:tiktok:0: 138699
+      ASNNumbers:tiktok:1: 396986
 
-      ASNNumbers:twitter:0: 13414
-      ASNNumbers:twitter:1: 35995
-      ASNNumbers:twitter:2: 63179
-      ASNNumbers:twitter:3: 63194
+      #ASNNumbers:twitch:0: 46489
+
+      #ASNNumbers:twitter:0: 13414
+      #ASNNumbers:twitter:1: 35995
+      #ASNNumbers:twitter:2: 63179
+      #ASNNumbers:twitter:3: 63194
 
       ASNNumbers:whatsapp:0: 11917
 
