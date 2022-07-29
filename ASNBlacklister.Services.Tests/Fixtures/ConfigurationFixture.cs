@@ -2,14 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace ASNBlacklister.Services.Tests.Fixtures;
+namespace ASNDenier.Services.Tests.Fixtures;
 
 public class ConfigurationFixture
 {
 	public ConfigurationFixture()
 	{
 		var configuration = new ConfigurationBuilder()
-			.AddUserSecrets<ASNBlacklister.WorkerService.Program>()
+			.AddUserSecrets<ASNDenier.WorkerService.Program>()
 			.Build();
 
 		var provider = new ServiceCollection()

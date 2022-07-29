@@ -1,4 +1,4 @@
-namespace ASNBlacklister.WorkerService;
+namespace ASNDenier.WorkerService;
 
 public class Program
 {

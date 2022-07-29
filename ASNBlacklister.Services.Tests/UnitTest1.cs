@@ -1,7 +1,7 @@
 using System.Net;
 using Xunit;
 
-namespace ASNBlacklister.Services.Tests;
+namespace ASNDenier.Services.Tests;
 
 public sealed class UnitTest1 : IClassFixture<Fixtures.ClientFixture>, IClassFixture<Fixtures.ServiceFixture>
 {

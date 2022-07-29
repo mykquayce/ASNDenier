@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASNBlacklister.WorkerService\ASNBlacklister.WorkerService.csproj" />
+    <ProjectReference Include="..\ASNBlacklister.WorkerService\ASNDenier.WorkerService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace ASNBlacklister.Services.Tests.Fixtures;
+﻿namespace ASNDenier.Services.Tests.Fixtures;
 
 public sealed class ServiceFixture : ConfigurationFixture, IDisposable
 {

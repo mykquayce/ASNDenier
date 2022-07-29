@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
-namespace ASNBlacklister.WorkerService
+namespace ASNDenier.WorkerService
 {
 	public class Worker : BackgroundService
 	{

@@ -1,6 +1,6 @@
 ﻿using WorkflowCore.Interface;
 
-namespace ASNBlacklister.Workflows;
+namespace ASNDenier.Workflows;
 
 public class Workflow : IWorkflow<Models.PersistenceData>
 {

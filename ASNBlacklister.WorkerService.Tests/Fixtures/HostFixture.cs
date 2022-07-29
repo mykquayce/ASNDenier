@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace ASNBlacklister.WorkerService.Tests.Fixtures;
+namespace ASNDenier.WorkerService.Tests.Fixtures;
 
 public sealed class HostFixture : IDisposable
 {

@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASNBlacklister.Workflows\ASNBlacklister.Workflows.csproj" />
+    <ProjectReference Include="..\ASNBlacklister.Workflows\ASNDenier.Workflows.csproj" />
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using Moq;
 using WorkflowCore.Interface;
 using Xunit;
 
-namespace ASNBlacklister.Workflows.Tests;
+namespace ASNDenier.Workflows.Tests;
 
 public class GetSubnetsStepTests
 {

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
-namespace ASNBlacklister.Workflows.Steps;
+namespace ASNDenier.Workflows.Steps;
 
 public class BlacklistSubnetsStep : IStepBody
 {

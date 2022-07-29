@@ -2,7 +2,7 @@
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
-namespace ASNBlacklister.Workflows.Steps;
+namespace ASNDenier.Workflows.Steps;
 
 public class ClearBlacklistStep : IStepBody
 {

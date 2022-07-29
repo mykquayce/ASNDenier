@@ -2,7 +2,7 @@ using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using Xunit;
 
-namespace ASNBlacklister.WorkerService.Tests;
+namespace ASNDenier.WorkerService.Tests;
 
 public sealed class HostTests : IClassFixture<Fixtures.HostFixture>
 {
@@ -39,7 +39,7 @@ public sealed class HostTests : IClassFixture<Fixtures.HostFixture>
 		var types = assembly.GetTypes();
 
 		return from t in types
-			   where string.Equals(t.Namespace, "ASNBlacklister.Workflows.Steps", StringComparison.OrdinalIgnoreCase)
+			   where string.Equals(t.Namespace, "ASNDenier.Workflows.Steps", StringComparison.OrdinalIgnoreCase)
 			   where (t as TypeInfo)?.ImplementedInterfaces.Contains(stepType) ?? false
 			   select t;
 	}
