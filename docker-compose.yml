@@ -31,9 +31,17 @@ services:
       ASNNumbers:facebook:1: 54115
       ASNNumbers:facebook:2: 63293
 
+      ASNNumbers:king:0: 62094
+
+      ASNNumbers:netease:0: 45062
+      ASNNumbers:netease:1: 131659
+      ASNNumbers:netease:2: 137263
+
       ASNNumbers:netflix:0: 2906
       ASNNumbers:netflix:1: 40027
       ASNNumbers:netflix:2: 55095
+
+      ASNNumbers:tencent:0: 45090
 
       ASNNumbers:tiktok:0: 138699
       ASNNumbers:tiktok:1: 396986
