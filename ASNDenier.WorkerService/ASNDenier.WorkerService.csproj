@@ -8,11 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Helpers.Networking" Version="1.6.20" />
+    <PackageReference Include="Helpers.SSH" Version="1.3.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASNDenier.Workflows\ASNDenier.Workflows.csproj" />
+    <ProjectReference Include="..\ASNDenier.Models\ASNDenier.Models.csproj" />
   </ItemGroup>
 </Project>

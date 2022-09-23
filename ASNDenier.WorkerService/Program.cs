@@ -26,16 +26,6 @@ public class Program
 					.AddTransient<Helpers.Networking.Clients.IWhoIsClient, Helpers.Networking.Clients.Concrete.WhoIsClient>()
 					.AddTransient<Helpers.SSH.IClient, Helpers.SSH.Concrete.Client>()
 					.AddTransient<Helpers.SSH.IService, Helpers.SSH.Concrete.Service>();
-
-				services
-					.AddTransient<Workflows.Steps.DenySubnetsStep>()
-					.AddTransient<Workflows.Steps.ClearDenylistStep>()
-					.AddTransient<Workflows.Steps.GetSubnetsStep>();
-
-				services.AddWorkflow(options =>
-				{
-					options.EnablePolling = false;
-				});
 			});
 
 		return hostBuilder;
