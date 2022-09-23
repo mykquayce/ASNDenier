@@ -7,18 +7,22 @@ public class Worker : BackgroundService
 {
 	private readonly ILogger<Worker> _logger;
 	private readonly IReadOnlyDictionary<string, int[]> _asnNumbers;
+	private readonly Models.Interval _interval;
 	private readonly Helpers.SSH.IService _sshService;
 	private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient;
 
 	public Worker(
 		ILogger<Worker> logger,
-		IOptions<Models.ASNNumbers> options,
+		IOptions<Models.ASNNumbers> asnNumbersOptions,
+		IOptions<Models.Interval> intervalOptions,
 		Helpers.SSH.IService sshService,
 		Helpers.Networking.Clients.IWhoIsClient whoIsClient)
 	{
 		_logger = Guard.Argument(logger).NotNull().Value;
-		_asnNumbers = Guard.Argument(options).NotNull().Wrap(o => o.Value)
+		_asnNumbers = Guard.Argument(asnNumbersOptions).NotNull().Wrap(o => o.Value)
 			.NotNull().NotEmpty().Value;
+		_interval = Guard.Argument(intervalOptions).NotNull().Wrap(o => o.Value)
+			.NotNull().Value;
 		_sshService = Guard.Argument(sshService).NotNull().Value;
 		_whoIsClient = Guard.Argument(whoIsClient).NotNull().Value;
 	}
@@ -28,6 +32,7 @@ public class Worker : BackgroundService
 		while (!stoppingToken.IsCancellationRequested)
 		{
 			await _sshService.DeleteBlackholesAsync();
+			_logger?.LogInformation("deleted blackholes");
 
 			foreach (var (organization, asns) in _asnNumbers)
 			{
@@ -43,7 +48,10 @@ public class Worker : BackgroundService
 				}
 			}
 
-			await Task.Delay(86_400_000, stoppingToken);
+			var delay = _interval.Next - DateTime.UtcNow;
+			var millisecondInterval = (int)delay.TotalMilliseconds;
+			_logger?.LogInformation(@"sleeping for {minutes:hh\:mm\:ss}", delay);
+			await Task.Delay(millisecondInterval, stoppingToken);
 		}
 	}
 }

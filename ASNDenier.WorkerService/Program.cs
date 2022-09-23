@@ -4,6 +4,7 @@ builder
 	.ConfigureServices((hostContext, services) =>
 	{
 		services
+			.Configure<ASNDenier.Models.Interval>(hostContext.Configuration.GetSection(nameof(ASNDenier.Models.Interval)))
 			.Configure<ASNDenier.Models.ASNNumbers>(hostContext.Configuration.GetSection(nameof(ASNDenier.Models.ASNNumbers)))
 			.Configure<Helpers.SSH.Config>(hostContext.Configuration.GetSection("Router"));
 

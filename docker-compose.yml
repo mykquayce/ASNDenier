@@ -55,6 +55,9 @@ services:
 
       ASNNumbers:whatsapp:0: 11917
 
+      Interval:Count: "0.25"
+      Interval:Unit: Days
+
       Router:PathToPrivateKey: /run/secrets/id_rsa
 
     secrets:
