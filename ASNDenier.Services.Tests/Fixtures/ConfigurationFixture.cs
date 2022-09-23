@@ -9,7 +9,7 @@ public class ConfigurationFixture
 	public ConfigurationFixture()
 	{
 		var configuration = new ConfigurationBuilder()
-			.AddUserSecrets<ASNDenier.WorkerService.Program>()
+			.AddUserSecrets<WorkerService.Worker>()
 			.Build();
 
 		var provider = new ServiceCollection()

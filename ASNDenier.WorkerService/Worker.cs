@@ -1,58 +1,57 @@
 using Dawn;
 using Microsoft.Extensions.Options;
-using WorkflowCore.Interface;
-using WorkflowCore.Models;
 
-namespace ASNDenier.WorkerService
+namespace ASNDenier.WorkerService;
+
+public class Worker : BackgroundService
 {
-	public class Worker : BackgroundService
+	private readonly ILogger<Worker> _logger;
+	private readonly IReadOnlyDictionary<string, int[]> _asnNumbers;
+	private readonly Models.Interval _interval;
+	private readonly Helpers.SSH.IService _sshService;
+	private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient;
+
+	public Worker(
+		ILogger<Worker> logger,
+		IOptions<Models.ASNNumbers> asnNumbersOptions,
+		IOptions<Models.Interval> intervalOptions,
+		Helpers.SSH.IService sshService,
+		Helpers.Networking.Clients.IWhoIsClient whoIsClient)
 	{
-		private readonly ILogger<Worker> _logger;
-		private readonly IWorkflowHost _workflowHost;
-		private readonly IReadOnlyDictionary<string, int[]> _asnNumbers;
+		_logger = Guard.Argument(logger).NotNull().Value;
+		_asnNumbers = Guard.Argument(asnNumbersOptions).NotNull().Wrap(o => o.Value)
+			.NotNull().NotEmpty().Value;
+		_interval = Guard.Argument(intervalOptions).NotNull().Wrap(o => o.Value)
+			.NotNull().Value;
+		_sshService = Guard.Argument(sshService).NotNull().Value;
+		_whoIsClient = Guard.Argument(whoIsClient).NotNull().Value;
+	}
 
-		public Worker(ILogger<Worker> logger, IWorkflowHost workflowHost, IOptions<Models.ASNNumbers> options)
+	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+	{
+		while (!stoppingToken.IsCancellationRequested)
 		{
-			_logger = logger
-				?? throw new ArgumentNullException(nameof(logger));
+			await _sshService.DeleteBlackholesAsync();
+			_logger?.LogInformation("deleted blackholes");
 
-			_workflowHost = workflowHost
-				?? throw new ArgumentNullException(nameof(workflowHost));
-			_workflowHost.OnStepError += WorkflowHost_OnStepError;
-
-			_workflowHost.RegisterWorkflow<Workflows.Workflow, Models.PersistenceData>();
-
-			_asnNumbers = Guard.Argument(options).NotNull().Wrap(o => o.Value)
-				.NotNull().NotEmpty().Value;
-		}
-
-		private void WorkflowHost_OnStepError(
-			WorkflowInstance workflow,
-			WorkflowStep step,
-			Exception exception)
-		{
-#if DEBUG
-			System.Diagnostics.Debugger.Break();
-#endif
-
-			_logger?.LogError(exception, "step error");
-		}
-
-		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-		{
-			await _workflowHost.StartAsync(stoppingToken);
-
-			while (!stoppingToken.IsCancellationRequested)
+			foreach (var (organization, asns) in _asnNumbers)
 			{
-				var data = new Models.PersistenceData
+				_logger.LogInformation("{organization} has {count} asn(s) : {asns}", organization, asns.Length, string.Join(", ", asns));
+
+				foreach (var asn in asns)
 				{
-					ASNNumbers = _asnNumbers,
-				};
-				await _workflowHost.StartWorkflow(nameof(Workflows.Workflow), data);
-				await Task.Delay(86_400_000, stoppingToken);
+					var prefixes = await _whoIsClient.GetIpsAsync(asn).ToListAsync(stoppingToken);
+
+					_logger?.LogInformation("Applying {Count} prefix(es)", prefixes.Count);
+
+					await _sshService.AddBlackholesAsync(prefixes);
+				}
 			}
 
-			await _workflowHost.StopAsync(stoppingToken);
+			var delay = _interval.Next - DateTime.UtcNow;
+			var millisecondInterval = (int)delay.TotalMilliseconds;
+			_logger?.LogInformation(@"sleeping for {minutes:hh\:mm\:ss}", delay);
+			await Task.Delay(millisecondInterval, stoppingToken);
 		}
 	}
 }

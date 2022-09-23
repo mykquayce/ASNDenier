@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32721.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.WorkerService", "ASNDenier.WorkerService\ASNDenier.WorkerService.csproj", "{F23A0519-81C4-4464-8930-738E9AF32873}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{559C61FF-88D4-4A61-9B2C-0C1C7993B82B}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
@@ -16,15 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		refresh.ps1 = refresh.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Workflows", "ASNDenier.Workflows\ASNDenier.Workflows.csproj", "{61FB4094-01A6-4A2F-97D7-46E1D3B31742}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Workflows.Tests", "ASNDenier.Workflows.Tests\ASNDenier.Workflows.Tests.csproj", "{8708BB4F-BF98-4095-995F-66B6EA02929E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Models", "ASNDenier.Models\ASNDenier.Models.csproj", "{36BB031D-029D-45F3-AE37-19EBA2B9477B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.WorkerService.Tests", "ASNDenier.WorkerService.Tests\ASNDenier.WorkerService.Tests.csproj", "{13EE2522-24A7-415D-8542-EBCF00246506}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Services.Tests", "ASNDenier.Services.Tests\ASNDenier.Services.Tests.csproj", "{7F5B851E-95D5-4A03-AB92-BF5FC17F4EEA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.WorkerService", "ASNDenier.WorkerService\ASNDenier.WorkerService.csproj", "{73D44067-E484-47F1-81D3-A7DBE7DC1312}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,30 +26,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F23A0519-81C4-4464-8930-738E9AF32873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F23A0519-81C4-4464-8930-738E9AF32873}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F23A0519-81C4-4464-8930-738E9AF32873}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F23A0519-81C4-4464-8930-738E9AF32873}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61FB4094-01A6-4A2F-97D7-46E1D3B31742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61FB4094-01A6-4A2F-97D7-46E1D3B31742}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61FB4094-01A6-4A2F-97D7-46E1D3B31742}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61FB4094-01A6-4A2F-97D7-46E1D3B31742}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8708BB4F-BF98-4095-995F-66B6EA02929E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8708BB4F-BF98-4095-995F-66B6EA02929E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8708BB4F-BF98-4095-995F-66B6EA02929E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8708BB4F-BF98-4095-995F-66B6EA02929E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36BB031D-029D-45F3-AE37-19EBA2B9477B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36BB031D-029D-45F3-AE37-19EBA2B9477B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36BB031D-029D-45F3-AE37-19EBA2B9477B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36BB031D-029D-45F3-AE37-19EBA2B9477B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13EE2522-24A7-415D-8542-EBCF00246506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13EE2522-24A7-415D-8542-EBCF00246506}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13EE2522-24A7-415D-8542-EBCF00246506}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13EE2522-24A7-415D-8542-EBCF00246506}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F5B851E-95D5-4A03-AB92-BF5FC17F4EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F5B851E-95D5-4A03-AB92-BF5FC17F4EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F5B851E-95D5-4A03-AB92-BF5FC17F4EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F5B851E-95D5-4A03-AB92-BF5FC17F4EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73D44067-E484-47F1-81D3-A7DBE7DC1312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D44067-E484-47F1-81D3-A7DBE7DC1312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D44067-E484-47F1-81D3-A7DBE7DC1312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73D44067-E484-47F1-81D3-A7DBE7DC1312}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
