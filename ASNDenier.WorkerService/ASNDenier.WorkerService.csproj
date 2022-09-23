@@ -1,17 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>65d3dfec-38af-477f-be93-03550bcd8980</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Helpers.Networking" Version="1.6.20" />
-    <PackageReference Include="Helpers.SSH" Version="1.3.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Helpers.Networking" Version="1.6.25-rc1" />
+    <PackageReference Include="Helpers.SSH" Version="1.3.9-rc1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0-rc.1.22426.10" />
   </ItemGroup>
 
   <ItemGroup>
