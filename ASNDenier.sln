@@ -14,11 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		refresh.ps1 = refresh.ps1
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.WorkerService", "ASNDenier.WorkerService\ASNDenier.WorkerService.csproj", "{73D44067-E484-47F1-81D3-A7DBE7DC1312}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Models", "ASNDenier.Models\ASNDenier.Models.csproj", "{36BB031D-029D-45F3-AE37-19EBA2B9477B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.Services.Tests", "ASNDenier.Services.Tests\ASNDenier.Services.Tests.csproj", "{7F5B851E-95D5-4A03-AB92-BF5FC17F4EEA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.WorkerService", "ASNDenier.WorkerService\ASNDenier.WorkerService.csproj", "{73D44067-E484-47F1-81D3-A7DBE7DC1312}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
