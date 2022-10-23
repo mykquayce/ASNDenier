@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Helpers.Timing" Version="1.0.1-rc2" />
+  </ItemGroup>
+
 </Project>
