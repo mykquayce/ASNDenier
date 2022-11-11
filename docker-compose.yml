@@ -48,10 +48,10 @@ services:
 
       #ASNNumbers:twitch:0: 46489
 
-      #ASNNumbers:twitter:0: 13414
-      #ASNNumbers:twitter:1: 35995
-      #ASNNumbers:twitter:2: 63179
-      #ASNNumbers:twitter:3: 63194
+      ASNNumbers:twitter:0: 13414
+      ASNNumbers:twitter:1: 35995
+      ASNNumbers:twitter:2: 63179
+      ASNNumbers:twitter:3: 63194
 
       ASNNumbers:whatsapp:0: 11917
 
