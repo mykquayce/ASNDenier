@@ -41,6 +41,13 @@ services:
       ASNNumbers:netflix:1: 40027
       ASNNumbers:netflix:2: 55095
 
+      ASNNumbers:sky:0: 5607
+      ASNNumbers:sky:1: 7922
+      ASNNumbers:sky:2: 39627
+      ASNNumbers:sky:3: 41012
+      ASNNumbers:sky:4: 207163
+      ASNNumbers:sky:5: 212465
+
       ASNNumbers:tencent:0: 45090
 
       ASNNumbers:tiktok:0: 138699
