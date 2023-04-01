@@ -50,9 +50,9 @@ public class Worker : BackgroundService
 			}
 
 			var delay = _interval.Next() - DateTime.UtcNow;
-			var millisecondInterval = (int)delay.TotalMilliseconds;
+			var secondsInterval = int.Clamp((int)delay.TotalSeconds, min: 300, max: 86_400);
 			_logger.LogInformation(@"sleeping for {minutes:hh\:mm\:ss}", delay);
-			await Task.Delay(millisecondInterval, stoppingToken);
+			await Task.Delay(secondsInterval, stoppingToken);
 		}
 	}
 }
