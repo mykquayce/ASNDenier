@@ -3,12 +3,12 @@
 	exit 0
 }
 
-docker pull mcr.microsoft.com/dotnet/runtime:7.0
-docker pull mcr.microsoft.com/dotnet/sdk:7.0
+docker pull mcr.microsoft.com/dotnet/runtime:8.0
+docker pull mcr.microsoft.com/dotnet/sdk:8.0
 docker pull eassbhhtgu/asndenier:latest
 
-$base1 = docker image inspect --format '{{.Created}}' mcr.microsoft.com/dotnet/runtime:7.0
-$base2 = docker image inspect --format '{{.Created}}' mcr.microsoft.com/dotnet/sdk:7.0
+$base1 = docker image inspect --format '{{.Created}}' mcr.microsoft.com/dotnet/runtime:8.0
+$base2 = docker image inspect --format '{{.Created}}' mcr.microsoft.com/dotnet/sdk:8.0
 $target = docker image inspect --format '{{.Created}}' eassbhhtgu/asndenier:latest
 
 if ($base1 -gt $target -or $base2 -gt $target) {
