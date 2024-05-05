@@ -3,16 +3,10 @@ using Xunit;
 
 namespace ASNDenier.Services.Tests;
 
-public sealed class UnitTest1 : IClassFixture<Fixtures.ClientFixture>, IClassFixture<Fixtures.ServiceFixture>
+public sealed class UnitTest1(Fixture fixture) : IClassFixture<Fixture>
 {
-	private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient;
-	private readonly Helpers.SSH.IService _sshService;
-
-	public UnitTest1(Fixtures.ClientFixture clientFixture, Fixtures.ServiceFixture serviceFixture)
-	{
-		_whoIsClient = clientFixture.WhoIsClient;
-		_sshService = serviceFixture.Service;
-	}
+	private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient = fixture.WhoIsClient;
+	private readonly Helpers.SSH.IService _sshService = fixture.Service;
 
 #pragma warning disable xUnit1004 // Test methods should not be skipped
 	[Theory(Skip = "destructive")]
