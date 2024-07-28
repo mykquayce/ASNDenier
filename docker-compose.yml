@@ -66,7 +66,7 @@ services:
       Interval:Unit: Days
 
       Router:Host: 192.168.1.10
-      Router:Port: "20"
+      Router:Port: "22"
       Router:UserName: root
       Router:PathToPrivateKey: /run/secrets/id_rsa
 
