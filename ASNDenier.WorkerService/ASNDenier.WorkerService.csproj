@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Helpers.Networking" Version="1.6.28" />
-    <PackageReference Include="Helpers.SSH" Version="1.4.0" />
+    <PackageReference Include="Helpers.SSH" Version="1.4.2" />
     <PackageReference Include="Helpers.Timing" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
