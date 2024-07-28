@@ -1,13 +1,8 @@
-docker pull mcr.microsoft.com/dotnet/sdk:8.0
-if (!$?) { return; }
-
-docker pull mcr.microsoft.com/dotnet/runtime:8.0
-if (!$?) { return; }
-
-docker build `
+docker buildx build `
+	--file '.\Dockerfile' `
+	--platform 'linux/arm64,linux/amd64' `
+	--pull `
+	--push `
 	--secret "id=ca_crt,src=${env:userprofile}\.aspnet\https\ca.crt" `
-	--tag eassbhhtgu/asndenier:latest `
+	--tag 'eassbhhtgu/asndenier:latest' `
 	.
-if (!$?) { return; }
-
-docker push eassbhhtgu/asndenier:latest

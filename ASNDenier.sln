@@ -7,11 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
 		build.ps1 = build.ps1
-		deploy.ps1 = deploy.ps1
 		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 		README.md = README.md
-		refresh.ps1 = refresh.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNDenier.WorkerService", "ASNDenier.WorkerService\ASNDenier.WorkerService.csproj", "{73D44067-E484-47F1-81D3-A7DBE7DC1312}"
