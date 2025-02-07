@@ -1,9 +1,8 @@
 using System.Net;
-using Xunit;
 
 namespace ASNDenier.Services.Tests;
 
-public sealed class UnitTest1(Fixture fixture) : IClassFixture<Fixture>
+public class UnitTest1(Fixture fixture) : IClassFixture<Fixture>
 {
 	private readonly Helpers.Networking.Clients.IWhoIsClient _whoIsClient = fixture.WhoIsClient;
 	private readonly Helpers.SSH.IService _sshService = fixture.Service;

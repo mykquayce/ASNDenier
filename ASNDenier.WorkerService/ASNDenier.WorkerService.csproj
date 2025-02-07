@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>65d3dfec-38af-477f-be93-03550bcd8980</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Helpers.Networking" Version="1.6.30" />
-    <PackageReference Include="Helpers.SSH" Version="1.4.4" />
-    <PackageReference Include="Helpers.Timing" Version="1.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Helpers.Networking" Version="1.6.31" />
+    <PackageReference Include="Helpers.SSH" Version="1.4.6" />
+    <PackageReference Include="Helpers.Timing" Version="1.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>

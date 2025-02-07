@@ -65,9 +65,9 @@ services:
       Interval:Count: "0.25"
       Interval:Unit: Days
 
-      Router:Host: 192.168.1.10
+      Router:Host: 192.168.1.80
       Router:Port: "22"
-      Router:UserName: root
+      Router:UserName: pi
       Router:PathToPrivateKey: /run/secrets/id_rsa
 
     secrets:

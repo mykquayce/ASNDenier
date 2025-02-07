@@ -1,31 +1,27 @@
-IHostBuilder builder = Host.CreateDefaultBuilder(args);
+var builder = Host.CreateApplicationBuilder(args);
 
-builder
-	.ConfigureServices((hostContext, services) =>
+builder.Services
+	.Configure<Helpers.Timing.Interval>(builder.Configuration.GetSection(nameof(Helpers.Timing.Interval)))
+	.Configure<ASNDenier.Models.ASNNumbers>(builder.Configuration.GetSection(nameof(ASNDenier.Models.ASNNumbers)));
+
+builder.Services.AddHostedService<ASNDenier.WorkerService.Worker>();
+
+builder.Services
+	.AddTransient<Helpers.Networking.Clients.IWhoIsClient, Helpers.Networking.Clients.Concrete.WhoIsClient>()
+	.AddSshClient(b =>
 	{
-		services
-			.Configure<Helpers.Timing.Interval>(hostContext.Configuration.GetSection(nameof(Helpers.Timing.Interval)))
-			.Configure<ASNDenier.Models.ASNNumbers>(hostContext.Configuration.GetSection(nameof(ASNDenier.Models.ASNNumbers)));
+		var config = builder.Configuration.GetSection("router").Get<Config>();
 
-		services.AddHostedService<ASNDenier.WorkerService.Worker>();
+		if (string.IsNullOrEmpty(config.Host) || string.IsNullOrEmpty(config.Username))
+		{
+			throw new KeyNotFoundException("router config missing");
+		}
 
-		services
-			.AddTransient<Helpers.Networking.Clients.IWhoIsClient, Helpers.Networking.Clients.Concrete.WhoIsClient>()
-			.AddSshClient(b =>
-			{
-				var config = hostContext.Configuration.GetSection("router").Get<Config>();
-
-				if (string.IsNullOrEmpty(config.Host) || string.IsNullOrEmpty(config.Username))
-				{
-					throw new KeyNotFoundException("router config missing");
-				}
-
-				b.Host = config.Host;
-				b.Port = config.Port;
-				b.Username = config.Username;
-				b.Password = config.Password;
-				b.PathToPrivateKey = config.PathToPrivateKey;
-			});
+		b.Host = config.Host;
+		b.Port = config.Port;
+		b.Username = config.Username;
+		b.Password = config.Password;
+		b.PathToPrivateKey = config.PathToPrivateKey;
 	});
 
 IHost host = builder.Build();
