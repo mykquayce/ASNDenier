@@ -62,8 +62,7 @@ services:
 
       ASNNumbers:whatsapp:0: 11917
 
-      Interval:Count: "0.25"
-      Interval:Unit: Days
+      Schedule: 0 */6 * * *
 
       Router:Host: 192.168.1.80
       Router:Port: "22"

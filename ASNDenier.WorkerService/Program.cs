@@ -1,7 +1,24 @@
+using Cronos;
+using Microsoft.Extensions.Options;
+
 var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services
-	.Configure<Helpers.Timing.Interval>(builder.Configuration.GetSection(nameof(Helpers.Timing.Interval)))
+	.AddSingleton<IOptions<CronExpression>>(p =>
+	{
+		var schedule = builder.Configuration["schedule"];
+		if (string.IsNullOrWhiteSpace(schedule))
+		{
+			throw new KeyNotFoundException("no schedule found.");
+		}
+
+		var ok = CronExpression.TryParse(schedule, CronFormat.Standard, out var cronExpression);
+		if (!ok)
+		{
+			throw new Exception($"could not parse {schedule} as cron.");
+		}
+		return Options.Create(cronExpression);
+	})
 	.Configure<ASNDenier.Models.ASNNumbers>(builder.Configuration.GetSection(nameof(ASNDenier.Models.ASNNumbers)));
 
 builder.Services.AddHostedService<ASNDenier.WorkerService.Worker>();

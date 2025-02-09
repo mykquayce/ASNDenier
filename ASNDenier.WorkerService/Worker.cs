@@ -1,4 +1,4 @@
-using Helpers.Timing;
+using Cronos;
 using Microsoft.Extensions.Options;
 
 namespace ASNDenier.WorkerService;
@@ -6,12 +6,11 @@ namespace ASNDenier.WorkerService;
 public class Worker(
 	ILogger<Worker> logger,
 	IOptions<Models.ASNNumbers> asnNumbersOptions,
-	IOptions<Interval> intervalOptions,
+	IOptions<CronExpression> schedule,
 	Helpers.SSH.IService sshService,
 	Helpers.Networking.Clients.IWhoIsClient whoIsClient) : BackgroundService
 {
 	private readonly IReadOnlyDictionary<string, int[]> _asnNumbers = asnNumbersOptions.Value;
-	private readonly IInterval _interval = intervalOptions.Value;
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
@@ -39,11 +38,17 @@ public class Worker(
 				}
 			}
 
-			var delay = new TimeSpan(long.Max(
-				TimeSpan.FromMinutes(5).Ticks,
-				(_interval.Next() - DateTime.UtcNow).Ticks));
+			var delay = getdelay();
 			logger.LogInformation(@"sleeping for {minutes:hh\:mm\:ss}", delay);
-			await Task.Delay(delay, stoppingToken);
+			try { await Task.Delay(delay, stoppingToken); }
+			catch (TaskCanceledException) { break; }
+		}
+
+		TimeSpan getdelay()
+		{
+			var min = TimeSpan.FromMinutes(5);
+			var next = schedule.Value.GetNextOccurrence(DateTime.UtcNow)!.Value - DateTime.UtcNow;
+			return next < min ? min : next;
 		}
 	}
 }
