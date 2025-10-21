@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cronos" Version="0.9.0" />
-    <PackageReference Include="Helpers.Networking" Version="1.6.31" />
-    <PackageReference Include="Helpers.SSH" Version="1.4.6" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="Cronos" Version="0.11.1" />
+    <PackageReference Include="Helpers.Networking" Version="1.6.32" />
+    <PackageReference Include="Helpers.SSH" Version="1.4.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
   </ItemGroup>
 
   <ItemGroup>
