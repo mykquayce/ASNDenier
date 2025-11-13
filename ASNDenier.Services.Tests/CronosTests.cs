@@ -20,7 +20,7 @@ public class CronosTests
 
 		Assert.True(ok);
 
-		var actual = expession.GetNextOccurrence(_now, TimeZoneInfo.Utc);
+		var actual = expession!.GetNextOccurrence(_now, TimeZoneInfo.Utc);
 
 		Assert.NotNull(actual);
 		Assert.Equal(DateTimeOffset.Parse(expected), actual.Value);
@@ -52,7 +52,7 @@ public class CronosTests
 				{
 					throw new Exception($"could not parse {schedule} as cron.");
 				}
-				return Options.Create(cronExpression);
+				return Options.Create(cronExpression!);
 			})
 			.BuildServiceProvider();
 
