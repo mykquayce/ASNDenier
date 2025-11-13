@@ -17,7 +17,7 @@ builder.Services
 		{
 			throw new Exception($"could not parse {schedule} as cron.");
 		}
-		return Options.Create(cronExpression);
+		return Options.Create(cronExpression!);
 	})
 	.Configure<ASNDenier.Models.ASNNumbers>(builder.Configuration.GetSection(nameof(ASNDenier.Models.ASNNumbers)));
 
